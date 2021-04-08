@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Github User</string>
+    <string name="change_language">Ganti bahasa</string>
+    <string name="search">cari</string>
+    <string name="search_hint">Cari…</string>
+    <plurals name="numberOfSearchResult">
+        <item quantity="other">%d akun ditemukan…</item>
+    </plurals>
+    <string name="tab_text_1">Pengikut</string>
+    <string name="tab_text_2">Mengikuti</string>
+    <string name="tab_text_3">Repository</string>
+    <string name="no_info">Tidak ada info</string>
+</resources>

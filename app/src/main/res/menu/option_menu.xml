@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_search"
+        android:icon="@drawable/ic_white_search_24"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="collapseActionView|always"
+        android:title="@string/search" />
+    <item android:id="@+id/menu_language"
+        android:title="@string/change_language"
+        android:icon="@drawable/ic_white_language_24"
+        app:showAsAction="ifRoom"/>
+
+</menu>
