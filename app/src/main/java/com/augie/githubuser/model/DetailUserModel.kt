@@ -5,8 +5,8 @@ data class DetailUserModel (
     var email: String = "",
     var location: String = "",
     var company: String = "",
-    var follower: Int = 0,
-    var following: Int = 0,
-    var repository: Int = 0,
+    var follower: String = "0",
+    var following: String = "0",
+    var repository: String = "0",
     var photo: String = ""
 )
