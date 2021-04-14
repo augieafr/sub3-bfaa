@@ -15,13 +15,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.augie.githubuser.adapter.UserAdapter
 import com.augie.githubuser.model.UserModel
 import com.augie.githubuser.databinding.ActivityMainBinding
-import com.augie.githubuser.viewmodel.UserViewModel
+import com.augie.githubuser.repository.MainUserRepository
+import com.augie.githubuser.viewmodel.MainViewModel
+import com.augie.githubuser.viewmodel.MainViewModelFactory
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: UserAdapter
-    private lateinit var userViewModel: UserViewModel
+    private lateinit var mainViewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,8 +35,10 @@ class MainActivity : AppCompatActivity() {
         binding.rvSearchResult.layoutManager = LinearLayoutManager(this)
         binding.rvSearchResult.adapter = adapter
 
-        userViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(UserViewModel::class.java)
-        userViewModel.getUser().observe(this, { listUser ->
+        val mainRepo = MainUserRepository()
+        val mainFactory = MainViewModelFactory(mainRepo)
+        mainViewModel = ViewModelProvider(this, mainFactory).get(MainViewModel::class.java)
+        mainViewModel.getUser().observe(this, { listUser ->
             if (listUser != null){
                 adapter.setData(listUser)
                 showLoading(false)
@@ -67,7 +71,7 @@ class MainActivity : AppCompatActivity() {
             // show user search result
             override fun onQueryTextSubmit(query: String?): Boolean {
                 showLoading(true)
-                userViewModel.setUser(query)
+                mainViewModel.setUser(query)
                 return true
             }
             override fun onQueryTextChange(newText: String?): Boolean {
