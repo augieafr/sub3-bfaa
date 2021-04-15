@@ -1,12 +1,10 @@
 package com.augie.githubuser.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.augie.githubuser.R
-import com.augie.githubuser.model.UserModel
 import com.augie.githubuser.databinding.UserItemsBinding
+import com.augie.githubuser.model.UserModel
 import com.bumptech.glide.Glide
 
 class UserAdapter : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
@@ -26,9 +24,19 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
         notifyDataSetChanged()
     }
 
-    inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val binding = UserItemsBinding.bind(itemView)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
+        val binding =
+            UserItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return UserViewHolder(binding)
+    }
 
+    override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
+        holder.bind(mData[position])
+    }
+
+    override fun getItemCount(): Int = mData.size
+
+    inner class UserViewHolder(private val binding: UserItemsBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(userItems: UserModel) {
             binding.apply {
                 tvUsername.text = userItems.name
@@ -36,22 +44,9 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
                     .load(userItems.photo)
                     .into(civProfile)
 
-                itemView.setOnClickListener { onItemClickCallback?.onItemClicked(userItems) }
+                root.setOnClickListener { onItemClickCallback?.onItemClicked(userItems) }
             }
         }
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-        val mView = LayoutInflater.from(parent.context).inflate(R.layout.user_items, parent, false)
-        return UserViewHolder(mView)
-    }
-
-    override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        holder.bind(mData[position])
-    }
-
-    override fun getItemCount(): Int {
-        return mData.size
     }
 
     interface OnItemClickCallback {
