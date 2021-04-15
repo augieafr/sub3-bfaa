@@ -2,6 +2,7 @@ package com.augie.githubuser.model
 
 data class DetailUserModel(
     var name: String = "",
+    var userName: String = "",
     var email: String = "",
     var location: String = "",
     var company: String = "",

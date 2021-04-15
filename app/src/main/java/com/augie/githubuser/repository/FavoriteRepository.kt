@@ -1,4 +1,13 @@
 package com.augie.githubuser.repository
 
-class FavoriteRepository {
+import com.augie.githubuser.dao.FavoriteDao
+import com.augie.githubuser.entity.FavoriteEntity
+
+class FavoriteRepository(private val favoriteDao: FavoriteDao) {
+
+    //val favoriteCursor = favoriteDao.getAllFavoriteCursor()
+
+    suspend fun getFavorite(): List<FavoriteEntity> {
+        return favoriteDao.getAllFavoriteList()
+    }
 }

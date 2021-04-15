@@ -3,6 +3,8 @@ package com.augie.githubuser.repository
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.augie.githubuser.BuildConfig
+import com.augie.githubuser.dao.FavoriteDao
+import com.augie.githubuser.entity.FavoriteEntity
 import com.augie.githubuser.model.DetailUserModel
 import com.augie.githubuser.model.RepositoryModel
 import com.augie.githubuser.model.UserModel
@@ -13,7 +15,19 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.lang.Exception
 
-class DetailUserRepository {
+class DetailUserRepository(private val favoriteDao: FavoriteDao) {
+
+    suspend fun insertFavorite(favorite: FavoriteEntity){
+        favoriteDao.insertFavorite(favorite)
+    }
+
+    suspend fun deleteFavorite(favorite: FavoriteEntity){
+        favoriteDao.deleteFavorite(favorite)
+    }
+
+    fun countFavorite(username: String): Int{
+        return favoriteDao.countFavorite(username)
+    }
 
     fun getUserDetail(
         username: String?,
@@ -36,6 +50,7 @@ class DetailUserRepository {
                 val result = String(responseBody)
                 try {
                     val responseObject = JSONObject(result)
+                    user.userName = responseObject.getString("login")
                     user.name = if (responseObject.getString("name") != "null")
                         responseObject.getString("name") else responseObject.getString("login")
                     user.email = check(responseObject.getString("email"))

@@ -1,12 +1,16 @@
 package com.augie.githubuser.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import com.augie.githubuser.entity.FavoriteEntity
 import com.augie.githubuser.model.DetailUserModel
 import com.augie.githubuser.model.RepositoryModel
 import com.augie.githubuser.model.UserModel
 import com.augie.githubuser.repository.DetailUserRepository
+import kotlinx.coroutines.launch
 
 class DetailViewModel(private val detailRepo: DetailUserRepository) : ViewModel() {
     private val detailUser = MutableLiveData<DetailUserModel>()
@@ -48,6 +52,19 @@ class DetailViewModel(private val detailRepo: DetailUserRepository) : ViewModel(
     fun getUserRepository(): MutableLiveData<ArrayList<RepositoryModel>> {
         return listRepository
     }
+
+    // function for database, since the process of insert and delete is in detail activity
+    // i will just put the method here
+    fun insert(favorite: FavoriteEntity) = viewModelScope.launch {
+        detailRepo.insertFavorite(favorite)
+        Log.d("TESINSERT", "fun insert")
+    }
+
+    fun delete(favorite: FavoriteEntity) = viewModelScope.launch {
+        detailRepo.deleteFavorite(favorite)
+    }
+
+    fun count(userName: String): Int = detailRepo.countFavorite(userName)
 
 }
 

@@ -7,18 +7,26 @@ import android.view.MenuItem
 import android.view.View
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.augie.githubuser.adapter.SectionsPagerAdapter
+import com.augie.githubuser.database.FavoriteDatabase
 import com.augie.githubuser.databinding.ActivityDetailBinding
+import com.augie.githubuser.entity.FavoriteEntity
 import com.augie.githubuser.repository.DetailUserRepository
 import com.augie.githubuser.viewmodel.DetailViewModel
 import com.augie.githubuser.viewmodel.DetailViewModelFactory
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
     private lateinit var detailViewModel: DetailViewModel
+    private lateinit var userPhoto: String
+    private var isFavorite: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +35,7 @@ class DetailActivity : AppCompatActivity() {
 
         // get username from main activity and get detail user from API then set it to the view
         val userName = intent.getStringExtra(EXTRA_USERNAME)
+
         showLoading(true)
         supportActionBar?.title = userName
         supportActionBar?.elevation = 0f
@@ -34,27 +43,13 @@ class DetailActivity : AppCompatActivity() {
         binding.tvUsername.text = userName
 
         // view model setup
-        val detailRepo = DetailUserRepository()
+        val favoriteDao = FavoriteDatabase.getInstance(application).favoriteDao
+        val detailRepo = DetailUserRepository(favoriteDao)
         val detailFactory = DetailViewModelFactory(detailRepo)
         detailViewModel = ViewModelProvider(this, detailFactory).get(DetailViewModel::class.java)
-        loadData(userName!!)
 
-        detailViewModel.getUserDetail().observe(this, { detailUser ->
-            if (detailUser != null) {
-                binding.tvNameDetail.text = detailUser.name
-                binding.tvLocation.text = detailUser.location
-                binding.tvCompany.text = detailUser.company
-                binding.tvEmail.text = detailUser.email
-                binding.tvFollowingQty.text = detailUser.following
-                binding.tvFollowerQty.text = detailUser.follower
-                binding.tvUsername.text = userName
-                binding.tvRepositoryQty.text = detailUser.repository
-                Glide.with(this@DetailActivity)
-                    .load(detailUser.photo)
-                    .into(binding.civProfileDetail)
-                showLoading(false)
-            }
-        })
+        backgroundTask(userName!!)
+        observe()
 
         // section pager and tab layout setup
         val sectionsPagerAdapter = SectionsPagerAdapter(this)
@@ -64,27 +59,74 @@ class DetailActivity : AppCompatActivity() {
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
 
-//        binding.fabFavorite.setOnClickListener{
-//            binding.fabFavorite.setImageResource(R.drawable.ic_baseline_favorite_24)
-//            Toast.makeText(this, "Berhasil ditambahkan", Toast.LENGTH_SHORT).show()
-//        }
+        binding.fabFavorite.setOnClickListener {
+            val favorite = FavoriteEntity(userName, userPhoto)
+            if (isFavorite){
+                detailViewModel.delete(favorite)
+                isFavorite = false
+                binding.fabFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+            } else {
+                detailViewModel.insert(favorite)
+                isFavorite = true
+                binding.fabFavorite.setImageResource(R.drawable.ic_baseline_favorite_24)
+            }
+        }
     }
 
-    private fun loadData(userName: String) {
-        detailViewModel.setUserDetail(userName, getString(R.string.no_info))
+    // load data and check if user already in favorite table (for fab icon purpose)
+    private fun backgroundTask(userName: String) {
         showLoading(true)
-        Log.d("DetailActivity", "setUserDetail")
+        // load data
+        detailViewModel.setUserDetail(userName, getString(R.string.no_info))
+
+        // check user
+        lifecycleScope.launch(Dispatchers.Default) {
+            val count = detailViewModel.count(userName)
+            withContext(Dispatchers.Main) {
+                Log.d("InMain", "count: $count")
+                if (count > 0){
+                    isFavorite = true
+                    binding.fabFavorite.setImageResource(R.drawable.ic_baseline_favorite_24)
+                } else {
+                    isFavorite = false
+                    binding.fabFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+                }
+            }
+        }
     }
+
+    private fun observe() {
+        detailViewModel.getUserDetail().observe(this, { detailUser ->
+            if (detailUser != null) {
+                binding.tvNameDetail.text = detailUser.name
+                binding.tvLocation.text = detailUser.location
+                binding.tvCompany.text = detailUser.company
+                binding.tvEmail.text = detailUser.email
+                binding.tvFollowingQty.text = detailUser.following
+                binding.tvFollowerQty.text = detailUser.follower
+                binding.tvUsername.text = detailUser.userName
+                binding.tvRepositoryQty.text = detailUser.repository
+                userPhoto = detailUser.photo
+                Glide.with(this@DetailActivity)
+                    .load(userPhoto)
+                    .into(binding.civProfileDetail)
+                showLoading(false)
+            }
+        })
+    }
+
 
     private fun showLoading(state: Boolean) {
         if (state) {
             with(binding) {
                 progressBarDetail.visibility = View.VISIBLE
+                fabFavorite.visibility = View.GONE
                 group.visibility = View.GONE
             }
         } else {
             with(binding) {
                 progressBarDetail.visibility = View.GONE
+                fabFavorite.visibility = View.VISIBLE
                 group.visibility = View.VISIBLE
             }
         }
