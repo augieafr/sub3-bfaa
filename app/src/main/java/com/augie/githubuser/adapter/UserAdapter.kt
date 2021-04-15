@@ -39,7 +39,7 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
     inner class UserViewHolder(private val binding: UserItemsBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(userItems: UserModel) {
             binding.apply {
-                tvUsername.text = userItems.name
+                tvUsername.text = userItems.userName
                 Glide.with(itemView.context)
                     .load(userItems.photo)
                     .into(civProfile)

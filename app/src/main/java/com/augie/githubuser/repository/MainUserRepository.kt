@@ -32,7 +32,7 @@ class MainUserRepository {
                     for (i in 0 until list.length()) {
                         val user = list.getJSONObject(i)
                         val searchResult = UserModel()
-                        searchResult.name = user.getString("login")
+                        searchResult.userName = user.getString("login")
                         searchResult.photo = user.getString("avatar_url")
                         listItem.add(searchResult)
                     }

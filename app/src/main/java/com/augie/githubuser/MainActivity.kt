@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemClicked(data: UserModel) {
                 // intent to detail activity
                 val mIntent = Intent(this@MainActivity, DetailActivity::class.java)
-                mIntent.putExtra(DetailActivity.EXTRA_USERNAME, data.name)
+                mIntent.putExtra(DetailActivity.EXTRA_USERNAME, data.userName)
                 startActivity(mIntent)
             }
 

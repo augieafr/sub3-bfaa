@@ -53,7 +53,7 @@ class FollowerFragment : Fragment() {
         adapter.setOnItemClickCallback(object : OnItemClickCallback {
             override fun onItemClicked(data: UserModel) {
                 val mIntent = Intent(view.context, DetailActivity::class.java)
-                mIntent.putExtra(DetailActivity.EXTRA_USERNAME, data.name)
+                mIntent.putExtra(DetailActivity.EXTRA_USERNAME, data.userName)
                 startActivity(mIntent)
             }
         })

@@ -85,7 +85,7 @@ class DetailUserRepository {
                     for (i in 0 until responseArray.length()) {
                         val user = responseArray.getJSONObject(i)
                         val follower = UserModel()
-                        follower.name = user.getString("login")
+                        follower.userName = user.getString("login")
                         follower.photo = user.getString("avatar_url")
                         listItem.add(follower)
                     }
