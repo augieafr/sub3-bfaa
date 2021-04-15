@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:viewBindingIgnore="true"
-    tools:context=".SplashScreen">
+    tools:context=".SplashScreen"
+    tools:viewBindingIgnore="true">
 
     <ImageView
-        android:contentDescription="@string/github_logo"
         android:id="@+id/img_logo"
         android:layout_width="120dp"
         android:layout_height="120dp"
+        android:contentDescription="@string/github_logo"
         android:src="@drawable/ic_github_logo_120"
         app:layout_constraintBottom_toTopOf="@+id/tv_title"
         app:layout_constraintEnd_toEndOf="parent"

@@ -8,7 +8,7 @@ import com.augie.githubuser.repository.MainUserRepository
 import java.lang.IllegalArgumentException
 
 class MainViewModel(private val mainRepo: MainUserRepository) : ViewModel() {
-    val listSearchUser = MutableLiveData<ArrayList<UserModel>>()
+    private val listSearchUser = MutableLiveData<ArrayList<UserModel>>()
 
 
     fun setSearchUser(username: String?) {

@@ -5,17 +5,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".fragment.FollowerFragment">
+
     <ProgressBar
         android:id="@+id/progress_bar_following"
+        style="?android:attr/progressBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        style="?android:attr/progressBarStyle"/>
+        android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_following"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/user_items"/>
+        tools:listitem="@layout/user_items" />
 
 </LinearLayout>

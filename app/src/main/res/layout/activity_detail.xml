@@ -23,14 +23,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/civ_profile_detail"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_github_logo_32" />
-
         <TextView
             android:id="@+id/tv_follower"
             style="@style/TextAppearance.MdcTypographyStyles.Subtitle"
@@ -52,7 +44,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/civ_profile_detail"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="100"/>
+            tools:text="100" />
 
         <TextView
             android:id="@+id/tv_following"
@@ -74,7 +66,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/tv_follower_qty"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="100"/>
+            tools:text="100" />
 
         <TextView
             android:id="@+id/tv_repository"
@@ -97,7 +89,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/tv_following_qty"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="100"/>
+            tools:text="100" />
 
         <TextView
             android:id="@+id/tv_name_detail"
@@ -178,16 +170,24 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="100dp" />
 
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tab_layout" />
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/line" />
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tab_layout" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/civ_profile_detail"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_github_logo_32" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

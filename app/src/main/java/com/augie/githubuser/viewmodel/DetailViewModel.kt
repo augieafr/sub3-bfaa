@@ -1,25 +1,18 @@
 package com.augie.githubuser.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.augie.githubuser.BuildConfig
 import com.augie.githubuser.model.DetailUserModel
 import com.augie.githubuser.model.RepositoryModel
 import com.augie.githubuser.model.UserModel
 import com.augie.githubuser.repository.DetailUserRepository
-import com.loopj.android.http.AsyncHttpClient
-import com.loopj.android.http.AsyncHttpResponseHandler
-import cz.msebera.android.httpclient.Header
-import org.json.JSONArray
-import java.lang.IllegalArgumentException
 
 class DetailViewModel(private val detailRepo: DetailUserRepository) : ViewModel() {
-    val detailUser = MutableLiveData<DetailUserModel>()
-    val listFollowing = MutableLiveData<ArrayList<UserModel>>()
-    val listFollower = MutableLiveData<ArrayList<UserModel>>()
-    val listRepository = MutableLiveData<ArrayList<RepositoryModel>>()
+    private val detailUser = MutableLiveData<DetailUserModel>()
+    private val listFollowing = MutableLiveData<ArrayList<UserModel>>()
+    private val listFollower = MutableLiveData<ArrayList<UserModel>>()
+    private val listRepository = MutableLiveData<ArrayList<RepositoryModel>>()
 
     // setter
     fun setUserRepository(username: String?) {
