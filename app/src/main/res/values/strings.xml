@@ -3,7 +3,7 @@
         <item quantity="one">%d user found…</item>
         <item quantity="other">%d users found…</item>
     </plurals>
-    <string name="change_language">Change languange</string>
+    <string name="setting">Setting</string>
     <string name="search">search</string>
     <string name="search_hint">Search…</string>
     <string name="app_name">Github User</string>
@@ -12,4 +12,6 @@
     <string name="tab_text_3">Repository</string>
     <string name="no_info">No info</string>
     <string name="github_logo">Github logo</string>
+    <string name="my_favorite">My Favorite</string>
+    <string name="add_to_favorite">Add to favorite</string>
 </resources>

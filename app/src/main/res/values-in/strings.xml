@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Github User</string>
-    <string name="change_language">Ganti bahasa</string>
+    <string name="setting">Pengaturan</string>
     <string name="search">cari</string>
     <string name="search_hint">Cari…</string>
     <plurals name="numberOfSearchResult">
@@ -12,4 +12,6 @@
     <string name="tab_text_3">Repository</string>
     <string name="no_info">Tidak ada info</string>
     <string name="github_logo">Github logo</string>
+    <string name="my_favorite">Favorit saya</string>
+    <string name="add_to_favorite">Tambah ke favorit</string>
 </resources>

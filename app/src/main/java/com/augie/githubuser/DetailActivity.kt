@@ -28,7 +28,6 @@ class DetailActivity : AppCompatActivity() {
         val userName = intent.getStringExtra(EXTRA_USERNAME)
         showLoading(true)
         supportActionBar?.title = userName
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding.tvUsername.text = userName
 
         // view model setup
