@@ -3,6 +3,7 @@ package com.augie.githubuser
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModelProvider
@@ -28,6 +29,8 @@ class DetailActivity : AppCompatActivity() {
         val userName = intent.getStringExtra(EXTRA_USERNAME)
         showLoading(true)
         supportActionBar?.title = userName
+        supportActionBar?.elevation = 0f
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding.tvUsername.text = userName
 
         // view model setup
@@ -51,7 +54,6 @@ class DetailActivity : AppCompatActivity() {
                     .into(binding.civProfileDetail)
                 showLoading(false)
             }
-
         })
 
         // section pager and tab layout setup
@@ -62,7 +64,10 @@ class DetailActivity : AppCompatActivity() {
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
 
-        supportActionBar?.elevation = 0f
+//        binding.fabFavorite.setOnClickListener{
+//            binding.fabFavorite.setImageResource(R.drawable.ic_baseline_favorite_24)
+//            Toast.makeText(this, "Berhasil ditambahkan", Toast.LENGTH_SHORT).show()
+//        }
     }
 
     private fun loadData(userName: String) {
@@ -83,6 +88,11 @@ class DetailActivity : AppCompatActivity() {
                 group.visibility = View.VISIBLE
             }
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) finish()
+        return super.onOptionsItemSelected(item)
     }
 
     companion object {
