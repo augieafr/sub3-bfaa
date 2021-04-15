@@ -98,12 +98,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == R.id.menu_language) {
-            // intent to language setting
-            val mIntent = Intent(Settings.ACTION_LOCALE_SETTINGS)
-            startActivity(mIntent)
-            true
-        } else true
+        return when(item.itemId){
+            R.id.menu_setting ->{
+                // intent to language setting
+                val mIntent = Intent(Settings.ACTION_LOCALE_SETTINGS)
+                startActivity(mIntent)
+                true
+            }
+
+            R.id.menu_favorite ->{
+                val mIntent = Intent(this@MainActivity, FavoriteActivity::class.java)
+                startActivity(mIntent)
+                true
+            }
+            else -> false
+        }
     }
 
     // function to show or not progress bar and text view result
