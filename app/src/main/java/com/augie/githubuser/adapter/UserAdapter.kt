@@ -14,12 +14,12 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
     private val mData = ArrayList<UserModel>()
     private var onItemClickCallback: OnItemClickCallback? = null
 
-    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback){
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback
     }
 
-    fun setData(items: ArrayList<UserModel>?){
-        if (items != null){
+    fun setData(items: ArrayList<UserModel>?) {
+        if (items != null) {
             mData.clear()
             mData.addAll(items)
         } else mData.clear()
@@ -29,7 +29,7 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
     inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = UserItemsBinding.bind(itemView)
 
-        fun bind(userItems: UserModel){
+        fun bind(userItems: UserModel) {
             binding.apply {
                 tvUsername.text = userItems.name
                 Glide.with(itemView.context)
@@ -54,7 +54,7 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
         return mData.size
     }
 
-    interface OnItemClickCallback{
+    interface OnItemClickCallback {
         fun onItemClicked(data: UserModel)
     }
 }

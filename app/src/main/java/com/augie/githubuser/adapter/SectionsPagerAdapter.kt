@@ -12,7 +12,7 @@ class SectionsPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(a
     var username: String? = null
     override fun createFragment(position: Int): Fragment {
         var fragment: Fragment? = null
-        when(position){
+        when (position) {
             0 -> fragment = FollowerFragment.newInstance(username)
             1 -> fragment = FollowingFragment.newInstance(username)
             2 -> fragment = RepositoryFragment.newInstance(username)

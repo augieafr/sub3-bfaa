@@ -30,16 +30,18 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // recycler view setup
         adapter = UserAdapter()
         adapter.notifyDataSetChanged()
         binding.rvSearchResult.layoutManager = LinearLayoutManager(this)
         binding.rvSearchResult.adapter = adapter
 
+        // view model setup
         val mainRepo = MainUserRepository()
         val mainFactory = MainViewModelFactory(mainRepo)
         mainViewModel = ViewModelProvider(this, mainFactory).get(MainViewModel::class.java)
-        mainViewModel.getUser().observe(this, { listUser ->
-            if (listUser != null){
+        mainViewModel.getSearchUser().observe(this, { listUser ->
+            if (listUser != null) {
                 adapter.setData(listUser)
                 showLoading(false)
                 setPluralTextResult(listUser.size)
@@ -67,19 +69,20 @@ class MainActivity : AppCompatActivity() {
 
         searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
         searchView.queryHint = resources.getString(R.string.search_hint)
-        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             // show user search result
             override fun onQueryTextSubmit(query: String?): Boolean {
                 showLoading(true)
-                mainViewModel.setUser(query)
+                mainViewModel.setSearchUser(query)
                 return true
             }
+
             override fun onQueryTextChange(newText: String?): Boolean {
                 return false
             }
         })
 
-        searchView.addOnAttachStateChangeListener(object: View.OnAttachStateChangeListener{
+        searchView.addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
             override fun onViewAttachedToWindow(v: View?) {
 
             }
@@ -95,7 +98,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == R.id.menu_language){
+        return if (item.itemId == R.id.menu_language) {
             // intent to language setting
             val mIntent = Intent(Settings.ACTION_LOCALE_SETTINGS)
             startActivity(mIntent)
@@ -116,7 +119,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // function to set text view result based on how many users found
-    private fun setPluralTextResult(number: Int){
+    private fun setPluralTextResult(number: Int) {
         val pluralText = resources.getQuantityString(R.plurals.numberOfSearchResult, number, number)
         binding.tvResult.text = pluralText
     }

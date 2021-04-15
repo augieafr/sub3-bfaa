@@ -13,25 +13,14 @@ import com.augie.githubuser.adapter.UserAdapter
 import com.augie.githubuser.model.UserModel
 import com.augie.githubuser.databinding.FragmentFollowerBinding
 import com.augie.githubuser.adapter.UserAdapter.OnItemClickCallback
-import com.augie.githubuser.viewmodel.UserViewModel
+import com.augie.githubuser.viewmodel.DetailViewModel
 
 class FollowerFragment : Fragment() {
 
     private var _binding: FragmentFollowerBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: UserAdapter
-    private lateinit var followerViewModel: UserViewModel
-
-    companion object {
-        private const val EXTRA_USERNAME = "extra_username"
-        @JvmStatic
-        fun newInstance(username: String?) =
-            FollowerFragment().apply {
-                arguments = Bundle().apply {
-                    putString(EXTRA_USERNAME, username)
-                }
-            }
-    }
+    private lateinit var followerViewModel: DetailViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,16 +41,16 @@ class FollowerFragment : Fragment() {
         binding.rvFollower.layoutManager = LinearLayoutManager(context)
         binding.rvFollower.adapter = adapter
 
-        followerViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(UserViewModel::class.java)
+        followerViewModel = ViewModelProvider(requireActivity()).get(DetailViewModel::class.java)
         showLoading(true)
-        followerViewModel.setFollow(username, "followers")
-        followerViewModel.getUser().observe(viewLifecycleOwner, {listUser ->
+        followerViewModel.setUserFollower(username)
+        followerViewModel.getUserFollower().observe(viewLifecycleOwner, { listFollower ->
             showLoading(false)
-            adapter.setData(listUser)
+            adapter.setData(listFollower)
         })
 
         // recyclerview on click callback
-        adapter.setOnItemClickCallback(object : OnItemClickCallback{
+        adapter.setOnItemClickCallback(object : OnItemClickCallback {
             override fun onItemClicked(data: UserModel) {
                 val mIntent = Intent(view.context, DetailActivity::class.java)
                 mIntent.putExtra(DetailActivity.EXTRA_USERNAME, data.name)
@@ -75,12 +64,23 @@ class FollowerFragment : Fragment() {
         _binding = null
     }
 
-    private fun showLoading(state: Boolean){
-        if (state){
+    private fun showLoading(state: Boolean) {
+        if (state) {
             binding.progressBarFollower.visibility = View.VISIBLE
         } else {
             binding.progressBarFollower.visibility = View.GONE
         }
     }
 
+    companion object {
+        private const val EXTRA_USERNAME = "extra_username"
+
+        @JvmStatic
+        fun newInstance(username: String?) =
+            FollowerFragment().apply {
+                arguments = Bundle().apply {
+                    putString(EXTRA_USERNAME, username)
+                }
+            }
+    }
 }

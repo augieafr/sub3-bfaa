@@ -8,26 +8,15 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.augie.githubuser.adapter.RepositoryAdapter
-import com.augie.githubuser.viewmodel.RepositoryViewModel
 import com.augie.githubuser.databinding.FragmentRepositoryBinding
+import com.augie.githubuser.viewmodel.DetailViewModel
 
 class RepositoryFragment : Fragment() {
 
     private var _binding: FragmentRepositoryBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: RepositoryAdapter
-    private lateinit var repoViewModel: RepositoryViewModel
-
-    companion object {
-        private const val EXTRA_USERNAME = "extra_username"
-        @JvmStatic
-        fun newInstance(username: String?) =
-                RepositoryFragment().apply {
-                    arguments = Bundle().apply {
-                        putString(EXTRA_USERNAME, username)
-                    }
-                }
-    }
+    private lateinit var repoViewModel: DetailViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,10 +37,10 @@ class RepositoryFragment : Fragment() {
         binding.rvRepository.layoutManager = LinearLayoutManager(context)
         binding.rvRepository.adapter = adapter
 
-        repoViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(RepositoryViewModel::class.java)
+        repoViewModel = ViewModelProvider(requireActivity()).get(DetailViewModel::class.java)
         showLoading(true)
-        repoViewModel.setRepo(username)
-        repoViewModel.getRepo().observe(viewLifecycleOwner, { listUser ->
+        repoViewModel.setUserRepository(username)
+        repoViewModel.getUserRepository().observe(viewLifecycleOwner, { listUser ->
             showLoading(false)
             adapter.setData(listUser)
         })
@@ -62,12 +51,24 @@ class RepositoryFragment : Fragment() {
         _binding = null
     }
 
-    private fun showLoading(state: Boolean){
-        if (state){
+    private fun showLoading(state: Boolean) {
+        if (state) {
             binding.progressBarRepository.visibility = View.VISIBLE
         } else {
             binding.progressBarRepository.visibility = View.GONE
         }
     }
 
+
+    companion object {
+        private const val EXTRA_USERNAME = "extra_username"
+
+        @JvmStatic
+        fun newInstance(username: String?) =
+            RepositoryFragment().apply {
+                arguments = Bundle().apply {
+                    putString(EXTRA_USERNAME, username)
+                }
+            }
+    }
 }

@@ -14,7 +14,7 @@ class RepositoryAdapter : RecyclerView.Adapter<RepositoryAdapter.RepositoryViewH
 
     private val mData = ArrayList<RepositoryModel>()
 
-    fun setData(items: ArrayList<RepositoryModel>){
+    fun setData(items: ArrayList<RepositoryModel>) {
         mData.clear()
         mData.addAll(items)
         notifyDataSetChanged()
@@ -23,8 +23,8 @@ class RepositoryAdapter : RecyclerView.Adapter<RepositoryAdapter.RepositoryViewH
     inner class RepositoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = RepositoryItemsBinding.bind(itemView)
 
-        fun bind(repoItems: RepositoryModel){
-            with(binding){
+        fun bind(repoItems: RepositoryModel) {
+            with(binding) {
                 tvDescription.text = repoItems.description
                 tvUsername.text = repoItems.name
 
@@ -37,7 +37,8 @@ class RepositoryAdapter : RecyclerView.Adapter<RepositoryAdapter.RepositoryViewH
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoryViewHolder {
-        val mView = LayoutInflater.from(parent.context).inflate(R.layout.repository_items, parent, false)
+        val mView =
+            LayoutInflater.from(parent.context).inflate(R.layout.repository_items, parent, false)
         return RepositoryViewHolder(mView)
     }
 
