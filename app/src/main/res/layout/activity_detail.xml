@@ -206,7 +206,7 @@
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/white"
         android:contentDescription="@string/add_to_favorite"
-        android:src="@drawable/ic_favorite_border_24"
+        android:src="@drawable/ic_baseline_favorite_border_24"
         app:layout_anchor="@id/nested_scrollview"
         app:layout_anchorGravity="bottom|end" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
