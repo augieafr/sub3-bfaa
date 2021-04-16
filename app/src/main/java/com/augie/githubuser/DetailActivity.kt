@@ -2,7 +2,6 @@ package com.augie.githubuser
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.annotation.StringRes
@@ -83,7 +82,6 @@ class DetailActivity : AppCompatActivity() {
         lifecycleScope.launch(Dispatchers.Default) {
             val count = detailViewModel.count(userName)
             withContext(Dispatchers.Main) {
-                Log.d("InMain", "count: $count")
                 if (count > 0){
                     isFavorite = true
                     binding.fabFavorite.setImageResource(R.drawable.ic_baseline_favorite_24)

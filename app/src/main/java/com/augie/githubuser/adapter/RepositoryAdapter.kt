@@ -2,6 +2,7 @@ package com.augie.githubuser.adapter
 
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -18,7 +19,8 @@ class RepositoryAdapter : RecyclerView.Adapter<RepositoryAdapter.RepositoryViewH
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoryViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup,
+                                    viewType: Int): RepositoryViewHolder {
         val binding =
             RepositoryItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return RepositoryViewHolder(binding)

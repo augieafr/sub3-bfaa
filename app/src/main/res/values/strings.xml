@@ -14,4 +14,5 @@
     <string name="github_logo">Github logo</string>
     <string name="my_favorite">My Favorite</string>
     <string name="add_to_favorite">Add to favorite</string>
+    <string name="no_favorite">You don\'t have favorite user</string>
 </resources>

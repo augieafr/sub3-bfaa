@@ -1,24 +1,26 @@
 package com.augie.githubuser.viewmodel
 
 import android.database.Cursor
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.augie.githubuser.entity.FavoriteEntity
 import kotlinx.coroutines.launch
 import com.augie.githubuser.repository.FavoriteRepository
+import java.lang.IllegalArgumentException
 
 class FavoriteViewModel(private val repository: FavoriteRepository) : ViewModel() {
 
-    private val listFavorite = MutableLiveData<List<FavoriteEntity>>()
+    val listFavorite = repository.allFavorite.asLiveData()
 
-    fun setListFavorite() = viewModelScope.launch {
-        val favorite = repository.getFavorite()
-        listFavorite.postValue(favorite)
-    }
+}
 
-    fun getListFavorite(): MutableLiveData<List<FavoriteEntity>> {
-        return listFavorite
+class FavoriteViewModelFactory(private val repository: FavoriteRepository) :
+    ViewModelProvider.Factory {
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(FavoriteViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return FavoriteViewModel(repository) as  T
+        }
+        throw IllegalArgumentException("Unkown ViewModel class")
     }
 
 }

@@ -9,5 +9,5 @@ data class FavoriteEntity(
     @ColumnInfo(name = "user_name")
     @PrimaryKey var userName: String ,
 
-    var photo: String?
+    var photo: String
 )
