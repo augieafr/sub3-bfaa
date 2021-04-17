@@ -40,7 +40,7 @@ class SettingFragment : PreferenceFragmentCompat(),
         if (key == ALARM) {
             if (alarmPreference.isChecked) {
                 Toast.makeText(context, getString(R.string.alarm_on), Toast.LENGTH_SHORT).show()
-                alarmReceiver.setAlarm(requireContext(), "4:20")
+                alarmReceiver.setAlarm(requireContext(), "9:00")
             } else {
                 Toast.makeText(context, getString(R.string.alarm_off), Toast.LENGTH_SHORT).show()
                 alarmReceiver.cancelAlarm(requireContext())
