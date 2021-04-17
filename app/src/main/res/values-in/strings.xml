@@ -14,5 +14,5 @@
     <string name="github_logo">Github logo</string>
     <string name="my_favorite">Favorit saya</string>
     <string name="add_to_favorite">Tambah ke favorit</string>
-    <string name="no_favorite">Kamu tidak memiliki daftar user favorit</string>
+    <string name="no_favorite">Kamu tidak memiliki user favorit</string>
 </resources>
