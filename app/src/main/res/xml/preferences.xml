@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <SwitchPreference
+        android:singleLine="true"
+        android:summary="Reminder at 09.00 AM"
+        android:key="@string/key_alarm"
+        android:title="@string/set_alarm"
+        android:icon="@drawable/ic_baseline_access_alarm_24"/>
+
+</PreferenceScreen>

@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -62,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
-        inflater.inflate(R.menu.option_menu, menu)
+        inflater.inflate(R.menu.menu_main, menu)
 
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchView = menu.findItem(R.id.menu_search).actionView as SearchView
@@ -101,8 +100,7 @@ class MainActivity : AppCompatActivity() {
         return when(item.itemId){
             R.id.menu_setting ->{
                 // intent to language setting
-                val mIntent = Intent(Settings.ACTION_LOCALE_SETTINGS)
-                startActivity(mIntent)
+                startActivity(Intent(this@MainActivity, SettingActivity::class.java))
                 true
             }
 

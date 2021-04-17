@@ -15,4 +15,8 @@
     <string name="my_favorite">My Favorite</string>
     <string name="add_to_favorite">Add to favorite</string>
     <string name="no_favorite">You don\'t have favorite user</string>
+    <string name="key_alarm">alarm</string>
+    <string name="set_alarm">Set Alarm</string>
+    <string name="alarm_on">Alarm on</string>
+    <string name="alarm_off">Alarm off</string>
 </resources>
