@@ -3,17 +3,17 @@ package com.augie.githubuser
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.augie.githubuser.adapter.UserAdapter
-import com.augie.githubuser.model.UserModel
 import com.augie.githubuser.databinding.ActivityMainBinding
+import com.augie.githubuser.model.UserModel
 import com.augie.githubuser.repository.MainUserRepository
 import com.augie.githubuser.viewmodel.MainViewModel
 import com.augie.githubuser.viewmodel.MainViewModelFactory
@@ -97,14 +97,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
-            R.id.menu_setting ->{
+        return when (item.itemId) {
+            R.id.menu_setting -> {
                 // intent to language setting
                 startActivity(Intent(this@MainActivity, SettingActivity::class.java))
                 true
             }
 
-            R.id.menu_favorite ->{
+            R.id.menu_favorite -> {
                 val mIntent = Intent(this@MainActivity, FavoriteActivity::class.java)
                 startActivity(mIntent)
                 true

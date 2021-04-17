@@ -19,4 +19,6 @@
     <string name="set_alarm">Set Alarm</string>
     <string name="alarm_on">Alarm on</string>
     <string name="alarm_off">Alarm off</string>
+    <string name="notif">Find your favorite github user now</string>
+    <string name="reminder">Reminder</string>
 </resources>

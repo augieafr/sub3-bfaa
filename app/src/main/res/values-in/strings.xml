@@ -19,4 +19,6 @@
     <string name="set_alarm">Pasang Alarm</string>
     <string name="alarm_on">Alarm hidup</string>
     <string name="alarm_off">Alarm mati</string>
+    <string name="notif">Temukan pengguna gihub favoritmu sekarang</string>
+    <string name="reminder">Pengingat</string>
 </resources>

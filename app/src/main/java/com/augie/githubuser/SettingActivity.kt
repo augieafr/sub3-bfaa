@@ -1,11 +1,11 @@
 package com.augie.githubuser
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import com.augie.githubuser.fragment.SettingFragment
 
 class SettingActivity : AppCompatActivity() {
@@ -15,7 +15,8 @@ class SettingActivity : AppCompatActivity() {
         supportActionBar?.title = getString(R.string.setting)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        supportFragmentManager.beginTransaction().add(R.id.setting_holder, SettingFragment()).commit()
+        supportFragmentManager.beginTransaction().add(R.id.setting_holder, SettingFragment())
+            .commit()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -24,6 +25,7 @@ class SettingActivity : AppCompatActivity() {
 
         return super.onCreateOptionsMenu(menu)
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> finish()

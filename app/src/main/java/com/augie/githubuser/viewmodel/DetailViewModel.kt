@@ -57,7 +57,6 @@ class DetailViewModel(private val detailRepo: DetailUserRepository) : ViewModel(
     // i will just put the method here
     fun insert(favorite: FavoriteEntity) = viewModelScope.launch {
         detailRepo.insertFavorite(favorite)
-        Log.d("TESINSERT", "fun insert")
     }
 
     fun delete(favorite: FavoriteEntity) = viewModelScope.launch {
