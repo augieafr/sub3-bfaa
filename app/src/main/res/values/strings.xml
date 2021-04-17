@@ -21,4 +21,6 @@
     <string name="alarm_off">Alarm off</string>
     <string name="notif">Find your favorite github user now</string>
     <string name="reminder">Reminder</string>
+    <string name="added_to_favorite">Added to favorite</string>
+    <string name="removed_from_favorite">Removed from favorite</string>
 </resources>

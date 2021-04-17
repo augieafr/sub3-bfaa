@@ -15,6 +15,7 @@ import com.augie.githubuser.repository.DetailUserRepository
 import com.augie.githubuser.viewmodel.DetailViewModel
 import com.augie.githubuser.viewmodel.DetailViewModelFactory
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -64,10 +65,12 @@ class DetailActivity : AppCompatActivity() {
                 detailViewModel.delete(favorite)
                 isFavorite = false
                 binding.fabFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+                Snackbar.make(binding.root, getString(R.string.removed_from_favorite), Snackbar.LENGTH_LONG).show()
             } else {
                 detailViewModel.insert(favorite)
                 isFavorite = true
                 binding.fabFavorite.setImageResource(R.drawable.ic_baseline_favorite_24)
+                Snackbar.make(binding.root, getString(R.string.added_to_favorite), Snackbar.LENGTH_LONG).show()
             }
         }
     }

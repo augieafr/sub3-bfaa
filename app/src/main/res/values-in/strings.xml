@@ -21,4 +21,6 @@
     <string name="alarm_off">Alarm mati</string>
     <string name="notif">Temukan pengguna gihub favoritmu sekarang</string>
     <string name="reminder">Pengingat</string>
+    <string name="added_to_favorite">Ditambahkan ke favorit</string>
+    <string name="removed_from_favorite">Dihapus dari favorit</string>
 </resources>
