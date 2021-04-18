@@ -23,4 +23,5 @@
     <string name="reminder">Pengingat</string>
     <string name="added_to_favorite">Ditambahkan ke favorit</string>
     <string name="removed_from_favorite">Dihapus dari favorit</string>
+    <string name="appwidget_text">Daftar Favorit Widget</string>
 </resources>

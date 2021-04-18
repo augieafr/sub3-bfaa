@@ -23,4 +23,5 @@
     <string name="reminder">Reminder</string>
     <string name="added_to_favorite">Added to favorite</string>
     <string name="removed_from_favorite">Removed from favorite</string>
+    <string name="appwidget_text">Favorite List Widget</string>
 </resources>
