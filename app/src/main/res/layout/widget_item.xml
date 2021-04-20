@@ -11,5 +11,6 @@
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        tools:srcCompat="@drawable/ic_github_logo_120" />
+        tools:srcCompat="@drawable/ic_github_logo_120"
+        android:contentDescription="TODO" />
 </LinearLayout>

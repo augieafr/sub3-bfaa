@@ -1,13 +1,10 @@
 package com.augie.githubuser.viewmodel
 
-import android.database.Cursor
 import androidx.lifecycle.*
-import com.augie.githubuser.entity.FavoriteEntity
-import kotlinx.coroutines.launch
 import com.augie.githubuser.repository.FavoriteRepository
 import java.lang.IllegalArgumentException
 
-class FavoriteViewModel(private val repository: FavoriteRepository) : ViewModel() {
+class FavoriteViewModel(repository: FavoriteRepository) : ViewModel() {
 
     val listFavorite = repository.allFavorite.asLiveData()
 

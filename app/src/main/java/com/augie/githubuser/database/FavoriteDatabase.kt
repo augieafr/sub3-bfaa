@@ -1,13 +1,11 @@
 package com.augie.githubuser.database
 
 import android.content.Context
-import android.net.Uri
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.augie.githubuser.dao.FavoriteDao
 import com.augie.githubuser.entity.FavoriteEntity
-import com.augie.githubuser.entity.FavoriteEntity.Companion.TABLE_NAME
 
 @Database(entities = [FavoriteEntity::class], version = 1)
 abstract class FavoriteDatabase : RoomDatabase() {
@@ -15,12 +13,6 @@ abstract class FavoriteDatabase : RoomDatabase() {
 
     companion object {
         const val AUTHORITY = "com.augie.githubuser"
-        const val SCHEME = "content"
-
-        val CONTENT_URI: Uri = Uri.Builder().scheme((SCHEME))
-            .authority(AUTHORITY)
-            .appendPath(TABLE_NAME)
-            .build()
 
         @Volatile
         private var INSTANCE: FavoriteDatabase? = null

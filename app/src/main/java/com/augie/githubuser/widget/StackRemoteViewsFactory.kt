@@ -2,7 +2,6 @@ package com.augie.githubuser.widget
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.util.Log
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import com.augie.githubuser.R
